@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package chat;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service Chat {
+  rpc ListMessages(google.protobuf.Empty) returns (ListMessagesResponse) {}
+  rpc Communicate(stream SendMessageRequest) returns (stream RecieveMessageResponse) {}
+}
+
+message ListMessagesResponse {
+  repeated Message messages = 1;
+}
+
+message SendMessageRequest {
+  Message message = 1;
+}
+
+message RecieveMessageResponse {
+  Message message = 1;
+}
+
+message Message {
+  string username = 1;
+  string body = 2;
+  google.protobuf.Timestamp sent_at = 3;
+}
