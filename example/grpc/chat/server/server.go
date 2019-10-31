@@ -9,11 +9,11 @@ import (
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/empty"
+	"github.com/kyfk/broadcast"
+	pb "github.com/kyfk/broadcast/example/grpc/chat/proto/chat"
 	"github.com/kyfk/log"
 	"github.com/kyfk/log/format"
 	"github.com/kyfk/log/level"
-	"github.com/kyfk/broadcast"
-	pb "github.com/kyfk/broadcast/example/grpc/chat/proto/chat"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

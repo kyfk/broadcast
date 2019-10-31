@@ -9,9 +9,9 @@ import (
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/empty"
+	pb "github.com/kyfk/broadcast/example/grpc/chat/proto/chat"
 	"github.com/kyfk/log"
 	"github.com/kyfk/log/format"
-	pb "github.com/kyfk/broadcast/example/grpc/chat/proto/chat"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
