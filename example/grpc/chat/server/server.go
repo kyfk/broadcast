@@ -33,6 +33,7 @@ type MessageStream struct {
 	logger   *log.Logger
 	stream   pb.Chat_CommunicateServer
 	hub      *broadcast.Hub
+	closed   bool
 }
 
 func (m *MessageStream) GetID() broadcast.ID {
@@ -52,6 +53,7 @@ func (m *MessageStream) Subscribe() error {
 }
 
 func (m *MessageStream) Unsubscribe() error {
+	m.closed = true
 	return m.hub.Publish(func(s broadcast.Subscriber) error {
 		return s.(*MessageStream).stream.Send(&pb.RecieveMessageResponse{
 			Message: &pb.Message{
@@ -82,6 +84,9 @@ func (s *server) Communicate(srv pb.Chat_CommunicateServer) error {
 
 	for {
 		res, err := srv.Recv()
+		if ms.closed {
+			return nil
+		}
 		if err != nil {
 			ms.err = err
 			s.hub.Unsubscribe(ms)
@@ -120,7 +125,7 @@ func main() {
 	pb.RegisterChatServer(s, &server{
 		hub: broadcast.New(
 			broadcast.Concurrency(10),
-			broadcast.AllowDuplicableID(true),
+			broadcast.AllowDuplicableID(false),
 		),
 		logger: logger,
 	})

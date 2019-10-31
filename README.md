@@ -10,6 +10,8 @@ Broadcaster provides simplest way of broadcasting in Golang.
 
 ## Example
 
+See [complete example](https://github.com/kyfk/broadcast/tree/master/example/grpc/chat) for more detail.
+
 ```go
 type subscriber struct {
     id string
