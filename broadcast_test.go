@@ -109,7 +109,7 @@ func TestUnsubscribe(t *testing.T) {
 	})
 }
 
-func ExamplePublish() {
+func ExampleHub_Publish() {
 	hub := New()
 	hub.Subscribe(&stabSubscriber{id: "id1"})
 	hub.Subscribe(&stabSubscriber{id: "id2"})
@@ -151,7 +151,7 @@ func TestPublishTo(t *testing.T) {
 	}, "id1", "id2"))
 }
 
-func ExampleTerminate() {
+func ExampleHub_Terminate() {
 	hub := New()
 	hub.Subscribe(&stabSubscriber{id: "id1"})
 	hub.Subscribe(&stabSubscriber{id: "id2"})
